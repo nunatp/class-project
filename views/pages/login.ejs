@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- เรียกใช้ Bootstrap CSS สำหรับการจัดการ UI ของฟอร์มให้ออกมาสวยงามและเป็นระเบียบ -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- สร้างคอนเทนเนอร์หลักกลางหน้า เพื่อให้องค์ประกอบต่าง ๆ อยู่กึ่งกลาง -->
+    <div class="container my-5">
+        <div class="form-container">
+            <!-- ส่วนหัวของฟอร์ม Login -->
+            <h2 class="text-center mb-4">Login</h2>
+
+            <!-- ฟอร์มสำหรับเข้าสู่ระบบ ส่งข้อมูลไปยัง '/login' ด้วยเมธอด POST -->
+            <form action="/login" method="POST">
+
+                <!-- ช่องกรอก Username -->
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+
+                <!-- ช่องกรอก Password -->
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+
+                <!-- ปุ่ม Login -->
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <!-- ลิงก์ไปยังหน้าสมัครสมาชิก (Sign Up) -->
+            <div class="text-center mt-3">
+                <a href="/signup">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- เรียกใช้ Bootstrap JavaScript และ dependencies สำหรับการจัดการฟังก์ชัน UI เช่น Popover -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
+</body>
+
+</html>

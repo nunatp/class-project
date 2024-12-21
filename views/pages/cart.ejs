@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Cart</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- owl stylesheets -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+        media="screen">
+</head>
+
+<body>
+    <!-- header section start -->
+    <div class="header_section">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="logo" href="/index"><img src="images/logo.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/design">Our Design</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/shop">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact Us</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="search_icon">
+                            <ul>
+                                <li><a href="/search"><img src="images/search-icon.png"></a></li>
+                                <li><a href="/login"><img src="images/user-icon.png"></a></li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+        </nav>
+   
+    <!-- header section end -->
+
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Shopping Cart</h1>
+    <table id="cart" class="table table-hover table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th style="width:50%">Product</th>
+                <th style="width:10%">Price</th>
+                <th style="width:8%">Quantity</th>
+                <th style="width:22%" class="text-center">Subtotal</th>
+                <th style="width:10%"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <!-- วนลูปแสดงสินค้าที่อยู่ในตะกร้า -->
+            <% cart.forEach(function(item) { %>
+                <tr>
+                    <!-- คอลัมน์สำหรับแสดงข้อมูลสินค้า -->
+                    <td data-th="Product">
+                        <div class="row">
+                            <!-- รูปภาพสินค้า (ซ่อนในมือถือ) -->
+                            <div class="col-sm-2 hidden-xs">
+                                <img src="images/<%= item.image %>" alt="" class="img-fluid rounded" />
+                            </div>
+                            <div class="col-sm-10">
+                                <!-- ชื่อสินค้า -->
+                                <h5 class="mt-2">
+                                    <%= item.name %>
+                                </h5>
+        
+                                <!-- แสดงราคา -->
+                                <% if (item.sale_price) { %>
+                                    <!-- แสดงราคาลด -->
+                                    <span class="text-danger font-weight-bold">$<%= item.sale_price %></span>
+                                    <!-- แสดงราคาปกติแบบขีดฆ่า -->
+                                    <small class="text-muted"><del>$<%= item.price %></del></small>
+                                    <% } else { %>
+                                        <!-- แสดงราคาปกติ -->
+                                        <span class="font-weight-bold">$<%= item.price %></span>
+                                        <% } %>
+                            </div>
+                        </div>
+                    </td>
+        
+                    <!-- คอลัมน์สำหรับแสดงราคา -->
+                    <td data-th="Price" class="align-middle text-center">
+                        <% if (item.sale_price) { %>
+                            <!-- แสดงราคาลด -->
+                            $<%= item.sale_price %>
+                                <% } else { %>
+                                    <!-- แสดงราคาปกติ -->
+                                    $<%= item.price %>
+                                        <% } %>
+                    </td>
+        
+                    <!-- คอลัมน์สำหรับแสดงปริมาณสินค้า -->
+                    <td data-th="Quantity" class="align-middle text-center">
+                        <form method="post" action="/edit_product_quantity"
+                            class="d-flex justify-content-center align-items-center">
+                            <input type="hidden" value="<%= item.id %>" name="id">
+        
+                            <!-- ปุ่มลดจำนวนสินค้า -->
+                            <input type="submit" value="-" name="decrease_product_quantity"
+                                class="btn btn-outline-secondary btn-sm mx-1">
+        
+                            <!-- แสดงปริมาณสินค้า (ไม่สามารถแก้ไขได้) -->
+                            <input type="text" name="quantity" value="<%= item.quantity %>" readonly>
+        
+                            <!-- ปุ่มเพิ่มจำนวนสินค้า -->
+                            <input type="submit" value="+" name="increase_product_quantity"
+                                class="btn btn-outline-secondary btn-sm mx-1">
+                        </form>
+                    </td>
+        
+                    <!-- คอลัมน์สำหรับแสดงราคารวมของสินค้า -->
+                    <td data-th="Subtotal" class="text-center align-middle">
+                        <% if (item.sale_price) { %>
+                            <!-- คำนวณราคารวมเมื่อมีราคาลด -->
+                            <span class="product-price font-weight-bold">$ <%= item.sale_price * item.quantity %></span>
+                            <% } else { %>
+                                <!-- คำนวณราคารวมเมื่อไม่มีราคาลด -->
+                                <span class="product-price font-weight-bold">$ <%= item.price * item.quantity %></span>
+                                <% } %>
+                    </td>
+        
+                    <!-- คอลัมน์สำหรับปุ่มลบสินค้า -->
+                    <td class="actions align-middle text-center" data-th="">
+                        <form method="post" action="/remove_product" style="display:inline;">
+                            <input type="hidden" name="id" value="<%= item.id %>">
+                            <!-- ปุ่มลบสินค้า -->
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">
+                    <a href="/design" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+                </td>
+                <td class="text-center align-middle"><strong>Total $<%= total %></strong></td>
+
+                <!-- <form method="get" action="/checkout">
+                    <input type="submit" class="btn checkout-btn" value="Checkout" name="">
+                </form> -->
+                <td>
+                    <a href="/checkout" class="btn btn-success btn-block"><i class="fa fa-credit-card"></i> Checkout</a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!-- footer section start -->
+<div class="footer_section">
+    <div class="container">
+        <div class="footer_location_text">
+            <ul>
+                <li><img src="images/map-icon.png"><span class="padding_left_10"><a
+                            href="https://maps.app.goo.gl/u7HDuTHtDcuQPbjbA">Informatics of BUU
+                            web</a></span></li>
+                <li><img src="images/call-icon.png"><span class="padding_left_10"><a href="#">Call : 038103061</a></span></li>
+                <li><img src="images/mail-icon.png"><span class="padding_left_10"><a
+                            href="https://www.informatics.buu.ac.th/2020/">informatics.buu.ac.th</a></span></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <h2 class="useful_text">Useful link </h2>
+                <div class="footer_menu">
+                    <ul>
+                        <li><a href="/index">Home</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/design">Our Designe</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <h2 class="useful_text">Repair</h2>
+                <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur adipiscinaliqua Loreadipiscing </p>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <h2 class="useful_text">Social Media</h2>
+                <div id="social">
+                    <a class="facebookBtn smGlobalBtn"
+                        href="https://www.facebook.com/?refsrc=https%3A%2F%2Fm.facebook.com%2Fprofile.php%3Fref%3Dcontent_filter&gad_source=1&gclid=Cj0KCQjwyL24BhCtARIsALo0fSCWtuHXdIeFYFrD6bvFpP5N7buVp1xKUTuB5EmSuxRHSmuzCb-qjZIaAkKpEALw_wcB&_rdr"></a>
+                    <a class="twitterBtn smGlobalBtn" href="https://x.com/?lang=en"></a>
+                    <a class="googleplusBtn smGlobalBtn" href="https://www.google.com/?hl=en-US&authuser=1"></a>
+                    <a class="linkedinBtn smGlobalBtn" href="https://www.linkedin.com/"></a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <h1 class="useful_text">Our Repair center</h1>
+                <p class="footer_text">Lorem ipsum dolor sit amet, consectetur adipiscinaliquaLoreadipiscing </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer section end -->
+<!-- Javascript files-->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/plugin.js"></script>
+<!-- sidebar -->
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- javascript -->
+<script src="js/owl.carousel.js"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+</body>
+
+</html>

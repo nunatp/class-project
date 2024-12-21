@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+    <!-- เรียกใช้ Bootstrap CSS สำหรับการตกแต่ง UI -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- สร้างคอนเทนเนอร์กลางหน้าเพื่อจัดวางฟอร์มให้อยู่กึ่งกลาง -->
+    <div class="container my-5">
+        <div class="form-container">
+            <!-- ส่วนหัวของฟอร์ม Sign Up -->
+            <h2 class="text-center mb-4">Sign Up</h2>
+
+            <!-- ฟอร์มการสมัครสมาชิก ส่งข้อมูลไปยัง '/signup' โดยใช้เมธอด POST -->
+            <form action="/signup" method="POST">
+
+                <!-- ช่องกรอก Username -->
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+
+                <!-- ช่องกรอก Password -->
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+
+                <!-- ช่องกรอก Email -->
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+
+                <!-- ปุ่มสำหรับส่งฟอร์ม Sign Up -->
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- เรียกใช้ Bootstrap JavaScript และ dependencies สำหรับฟังก์ชันการทำงานของ UI เช่น ป๊อปโอเวอร์ -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1>Checkout</h1>
+    </div>
+    <div class="card shadow-lg p-4">
+        <form id="checkout-form" method="post" action="/place_order">
+            <div class="form-group">
+                <label for="checkout-name">Name</label>
+                <input type="text" class="form-control" id="checkout-name" name="name" placeholder="Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkout-email">Email</label>
+                <input type="email" class="form-control" id="checkout-email" name="email" placeholder="Email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkout-phone">Phone</label>
+                <input type="tel" class="form-control" id="checkout-phone" name="phone" placeholder="Phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkout-city">City</label>
+                <input type="text" class="form-control" id="checkout-city" name="city" placeholder="City" required>
+            </div>
+
+            <div class="form-group">
+                <label for="checkout-address">Address</label>
+                <input type="text" class="form-control" id="checkout-address" name="address" placeholder="Address"
+                    required>
+            </div>
+
+            <div class="form-group text-center">
+                <p class="font-weight-bold">Total amount: $<%= total %>
+                </p>
+                <button type="submit" class="btn btn-primary btn-lg" id="checkout-btn">Checkout</button>
+            </div>
+        </form>
+    </div>
+</div>
